@@ -1,6 +1,6 @@
 window.Artist = Backbone.Model.extend({
 
-    urlRoot:"../api/people/",
+    urlRoot:"../api/artist/",
 
     initialize:function () {
         this.list = new PersonCollection();
@@ -9,11 +9,11 @@ window.Artist = Backbone.Model.extend({
 
 });
 
-window.PersonCollection = Backbone.Collection.extend({
+window.ArtistCollection = Backbone.Collection.extend({
 
     model: Artist,
 
-    url:"../api/people",
+    url:"../api/artist",
 
     findByName:function (key) {
         var url = (key == '') ? '../api/artist' : "../api/artist/search/?query=" + key;
