@@ -22,7 +22,7 @@ def find_path_between_artists(artist_name):
     for path_item in path:
         actor_name = path_item[0]
         movie_id = path_item[1]
-        actor_model = __artist_data.get_actor_by_name(actor_name)
+        actor_model = __artist_data.get_artist_by_name(actor_name)
         movie = __artist_data.get_movie_by_id(movie_id)
 
         if movie is not None:
@@ -40,7 +40,6 @@ def shortest_link(actor_name):
 
     # Note about the algorithm:
     # Type: Breadth first
-    current_app.logger.info(u"-----> check path")
     # First, check if the actor's name is 'Kevin Bacon' or if the actor is
     # not present in the 'actor_dict'. If either of them if True
     # then return the empty list.

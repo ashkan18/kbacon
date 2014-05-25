@@ -1,4 +1,4 @@
-__author__ = 'root'
+__author__ = 'Ashkan'
 
 
 class ModelTypes(object):
@@ -6,12 +6,12 @@ class ModelTypes(object):
     MOVIE = 2
 
 
-def jsonify_artist_model(actor_model):
-    artist_json = {'name': actor_model.info['name']}
-    if 'image' in actor_model.info:
-        artist_json['image'] = actor_model.info['image']
+def jsonify_artist_model(artist_model):
+    artist_json = {'name': artist_model.info['name']}
+    if 'image' in artist_model.info:
+        artist_json['image'] = artist_model.info['image']
     else:
-        actor_model.info['image'] = ''
+        artist_model.info['image'] = ''
     artist_json['type'] = ModelTypes.ARTIST
     return artist_json
 

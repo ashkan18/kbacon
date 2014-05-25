@@ -16,6 +16,24 @@ file_handler = StreamHandler()
 app.logger.setLevel(logging.DEBUG)  # set the desired logging level here
 app.logger.addHandler(file_handler)
 
+
+@app.route('/api/artists/search/', methods=['GET'])
+def search_artists():
+    query = request.args['query']
+    search_results = artists_services.search_artists(query)
+    json_result = []
+    for artist in search_results:
+        json_result.append(jsonify_artist_model(artist))
+    return jsonify(artists=json_result)
+
+
+@app.route('/api/artists/<string:artist_name>', methods=['GET'])
+def find_path(artist_name):
+    app.logger.info(u"Get artist info by name: {0}".format(artist_name))
+    path = artists_services.find_path_between_artists(artist_name)
+    return jsonify(path=path)
+
+
 @app.route('/api/artists/', methods=['GET'])
 def get_all_artists():
     """
@@ -25,22 +43,6 @@ def get_all_artists():
     """
     return jsonify(artists=artists_services.get_all_artists())
 
-
-@app.route('/api/artists/search/', methods=['GET'])
-def search_artists():
-    query = request.args['query']
-    search_results = artists_services.search_artists(query)
-    json_result = []
-    for actor in search_results:
-        json_result.append(jsonify_artist_model(actor))
-    return jsonify(artists=json_result)
-
-
-@app.route('/api/artists/<string:artist_name>', methods=['GET'])
-def find_path(artist_name):
-    app.logger.info("hi")
-    path = artists_services.find_path_between_artists(artist_name)
-    return jsonify(path=path)
 
 @app.errorhandler(404)
 def page_not_found(e):

@@ -62,9 +62,6 @@ class ArtistData(object):
         return artist_name in artist_dict
 
     def get_all_films_for_artist(self, artist_name):
-        current_app.logger.info(u'1---->{0}'.format(artist_name))
-        current_app.logger.info(u'2-------->{0}'.format(artist_dict[artist_name]))
-        current_app.logger.info(u'3---------->{0}'.format(artist_dict[artist_name].films))
         for film in artist_dict[artist_name].films:
             yield film
 
@@ -74,7 +71,7 @@ class ArtistData(object):
         else:
             return None
 
-    def get_actor_by_name(self, actor_name):
+    def get_artist_by_name(self, actor_name):
         if actor_name in artist_dict:
             return artist_dict[actor_name]
         else:
