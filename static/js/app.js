@@ -22,15 +22,17 @@ window.Router = Backbone.Router.extend({
     },
 
     artistDetails: function(id)  {
+        // first clear the content area
+        $('#pleaseWaitDialog').modal({show:true});
         var artist = new Artist({id: id});
         // get artist details (including path) from the server
         artist.fetch({
             success: function (data) {
+                $('#pleaseWaitDialog').modal('hide');
                 console.log("Artist detail:" + JSON.stringify(data));
                 $('#content').html(new ArtistView({model: data}).render().el);
             }
         });
-
     }
 });
 

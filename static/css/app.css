@@ -8,3 +8,9 @@
     padding-top: 6px;
     padding-left: 56px;
 }
+
+#pleaseWaitDialog {
+    position: absolute;
+    top: 15%;
+    left: 5%;
+}
