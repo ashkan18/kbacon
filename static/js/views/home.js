@@ -1,20 +1,14 @@
 window.HomeView = Backbone.View.extend({
+    el: '#content',
 
     initialize:function () {
         console.log('Initializing Home View');
-    },
-
-    events:{
-        "click #showMeBtn":"showMeBtnClick"
+        this.render();
     },
 
     render:function () {
         $(this.el).html(this.template());
         return this;
-    },
-
-    showMeBtnClick:function () {
-        app.headerView.search();
     }
 
 });

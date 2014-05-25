@@ -1,4 +1,6 @@
 import os
+import artists_services
+from helpers.json_helper import jsonify_artist_model
 
 __author__ = 'Ashkan'
 
@@ -7,25 +9,30 @@ from flask import Flask, jsonify, request
 app = Flask(__name__)
 
 
-@app.route('/api/people/', methods=['GET'])
-def get_all_people():
+@app.route('/api/artists/', methods=['GET'])
+def get_all_artists():
     """
-    This interface returns the list of people with the query string in their name
+    This interface returns the list of artists with the query string in their name
     sample curl:
-        curl -X GET http://localhost:999/people/
+        curl -X GET http://localhost:999/artists/
     """
-    return jsonify(people={[{'name':'ashkan', 'movies':['rain', 'dar an sooy']},
-                            {'name': 'nasseri', 'movies': ['estop']}]})
+    return jsonify(artists=artists_services.get_all_artists())
 
 
-@app.route('api/people/search/', methods=['GET'])
-def search_people():
-    return jsonify(people={[{'name':'ashkan', 'movies':['rain', 'dar an sooy']}]})
+@app.route('/api/artists/search/', methods=['GET'])
+def search_artists():
+    query = request.args['query']
+    search_results = artists_services.search_artists(query)
+    json_result = []
+    for actor in search_results:
+        json_result.append(jsonify_artist_model(actor))
+    return jsonify(artists=json_result)
 
 
-@app.route('/api/people/path/<int:person_id>', methods=['GET'])
-def find_path(person_id):
-    return jsonify(path=[{'actor': 'sean penn', 'movie': 'mystic'}, {'name': 'clint', 'movie': 'movie2'}])
+@app.route('/api/artists/<string:artist_name>', methods=['GET'])
+def find_path(artist_name):
+    path = artists_services.find_path_between_artists(artist_name)
+    return jsonify(path=path)
 
 @app.errorhandler(404)
 def page_not_found(e):

@@ -1,10 +1,10 @@
 window.Artist = Backbone.Model.extend({
 
-    urlRoot:"../api/artist/",
+    urlRoot:"../api/artists/",
 
     initialize:function () {
-        this.list = new PersonCollection();
-        this.list.url = '../api/people/' + this.id + '/path';
+        this.list = new ArtistCollection();
+        this.list.url = '../api/artists/' + this.id + '/path';
     }
 
 });
@@ -16,15 +16,16 @@ window.ArtistCollection = Backbone.Collection.extend({
     url:"../api/artist",
 
     findByName:function (key) {
-        var url = (key == '') ? '../api/artist' : "../api/artist/search/?query=" + key;
+        var url = (key == '') ? '../api/artists' : "../api/artists/search/?query=" + key;
         console.log('findByName: ' + key);
         var self = this;
         $.ajax({
             url:url,
             dataType:"json",
             success:function (data) {
-                console.log("search success: " + data.length);
-                self.reset(data);
+                console.log("---->" + data['artists'].length);
+                console.log("search success: " + JSON.stringify(data['artists']));
+                self.reset(data['artists']);
             }
         });
     }

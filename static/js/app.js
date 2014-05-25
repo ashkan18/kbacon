@@ -6,31 +6,27 @@ window.Router = Backbone.Router.extend({
     },
 
     initialize: function () {
+        // show header section on the initiliaze of the app
         this.headerView = new HeaderView();
-        $('.header').html(this.headerView.render().el);
 
         // Close the search dropdown on click anywhere in the UI
         $('body').click(function () {
             $('.dropdown').removeClass("open");
         });
     },
-    home: function () {
-        // Since the home view never changes, we instantiate it and render it only once
-        if (!this.homeView) {
-            this.homeView = new HomeView();
-            this.homeView.render();
-        }
 
-        $("#content").html(this.homeView.el);
-        this.headerView.select('home-menu');
+    // showing the landing page content
+    home: function () {
+        // render home page by creating home view
+        this.homeView = new HomeView();
     },
 
     artistDetails: function(id)  {
         var artist = new Artist({id: id});
+        // get artist details (including path) from the server
         artist.fetch({
             success: function (data) {
-                // Note that we could also 'recycle' the same instance of EmployeeFullView
-                // instead of creating new instances
+                console.log("Artist detail:" + JSON.stringify(data));
                 $('#content').html(new ArtistView({model: data}).render().el);
             }
         });
@@ -41,7 +37,7 @@ window.Router = Backbone.Router.extend({
 
 
 // this is defined in templateLoader.js
-templateLoader.load(["HomeView", "HeaderView"],
+templateLoader.load(["HomeView", "HeaderView", 'ArtistListItemView', 'ArtistView'],
     function () {
         // after loading templates now start the app
         app = new Router();

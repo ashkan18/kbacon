@@ -1,29 +1,40 @@
+/**
+ * This view handles showin list of artists
+ *
+ */
 window.ArtistListView = Backbone.View.extend({
 
     tagName:'ul',
 
-    className:'nav nav-list',
+    className: 'dropdown-menu',
 
     initialize:function () {
         var self = this;
         this.model.bind("reset", this.render, this);
-        this.model.bind("add", function (employee) {
-            $(self.el).append(new EmployeeListItemView({model:employee}).render().el);
+        this.model.bind("add", function (artist) {
+            $(self.el).append(new ArtistListItemView({model:artist}).render().el);
         });
     },
 
     render:function () {
+        // clear the list
         $(this.el).empty();
-        _.each(this.model.models, function (employee) {
-            $(this.el).append(new EmployeeListItemView({model:employee}).render().el);
+        console.log("Search results total=" + this.model.models.length);
+        _.each(this.model.models, function (artist) {
+            $(this.el).append(new ArtistListItemView({model:artist}).render().el);
         }, this);
         return this;
     }
 });
 
+/**
+ * This view handles showing an individual artist item in search artist list
+ * @type {*}
+ */
 window.ArtistListItemView = Backbone.View.extend({
-
     tagName:"li",
+
+    className: "artist-search-results",
 
     initialize:function () {
         this.model.bind("change", this.render, this);
@@ -31,6 +42,7 @@ window.ArtistListItemView = Backbone.View.extend({
     },
 
     render:function () {
+        // pass the model to the template
         $(this.el).html(this.template(this.model.toJSON()));
         return this;
     }
