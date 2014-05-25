@@ -1,5 +1,6 @@
-from artist_data import ArtistData
+from data.artist_data import ArtistData
 from helpers.json_helper import jsonify_artist_model, jsonify_movie_model
+from flask import current_app
 
 __author__ = 'Ashkan'
 
@@ -39,7 +40,7 @@ def shortest_link(actor_name):
 
     # Note about the algorithm:
     # Type: Breadth first
-
+    current_app.logger.info(u"-----> check path")
     # First, check if the actor's name is 'Kevin Bacon' or if the actor is
     # not present in the 'actor_dict'. If either of them if True
     # then return the empty list.
@@ -65,8 +66,9 @@ def shortest_link(actor_name):
         # actor link is a list of tuple, example:
         # [(actor_model, movie_model), (actor_model2, movie_model2)]
         actor_name = actor_link[len(actor_link) - 1][0]
-
+        current_app.logger.info(u"-----> check path")
         for movie_id in __artist_data.get_all_films_for_artist(actor_name):
+            current_app.logger.info(u"---->{0}".format(movie_id))
             movie = __artist_data.get_movie_by_id(movie_id)
             for co_star in movie.casts:
 
@@ -85,7 +87,7 @@ def shortest_link(actor_name):
                     elif not (co_star_name in investigated):
                         investigated.append(co_star_name)
                         full_link = actor_link[:]
-                        full_link.append((co_star, movie.id))
+                        full_link.append((co_star_name, movie.id))
                         to_investigate.append(full_link)
 
         # Remove the actor_link (sublist) from the
