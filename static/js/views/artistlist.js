@@ -8,6 +8,8 @@ window.ArtistListView = Backbone.View.extend({
 
     className: 'dropdown-menu',  // we want to show the results in dropdown menu
 
+    SEARCH_DROPDOWN_SELECTOR: '.dropdown',
+
     initialize:function () {
         var self = this;
         this.model.bind("reset", this.render, this);
@@ -20,7 +22,6 @@ window.ArtistListView = Backbone.View.extend({
     render:function () {
         // clear the list
         $(this.el).empty();
-        console.log("Search results total=" + this.model.models.length);
 
         // if model is not empty, iterate through each item in search result and render ArtistListItemView
         if (this.model.models.length >> 0) {
@@ -29,10 +30,18 @@ window.ArtistListView = Backbone.View.extend({
             }, this);
         } else {
             // if search results was empty, show "No Results"
-            $(this.el).append('<li class="text-center">No Resutls</li>');
+            $(this.el).empty();
         }
         return this;
+    },
+
+    clearResults: function() {
+        // this method clears the dropdown box
+        $(this.el).empty();
+        $(this.SEARCH_DROPDOWN_SELECTOR).removeClass("open");
     }
+
+
 });
 
 /**
