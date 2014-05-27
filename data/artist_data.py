@@ -31,7 +31,6 @@ class ArtistData(object):
             file_full_path = join(FILMS_FOLDER_PATH, f)
             if isfile(file_full_path):
                 self.__read_file(file_full_path)
-        current_app.logger.info(u"Finished reading the data and populating the dictionaries")
 
     def __read_file(self, json_file):
         """
