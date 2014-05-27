@@ -1,3 +1,8 @@
+"""
+This module defines all the methods needed for getting artists and their related information
+
+"""
+
 from data.artist_data import ArtistData
 from helpers.json_helper import jsonify_artist_model, jsonify_movie_model
 from flask import current_app
@@ -8,8 +13,13 @@ __artist_data = ArtistData()
 __artist_data.init_data()
 
 
-def search_artists(name):
-    return __artist_data.search_artists_by_name(name)
+def search_artists(search_query):
+    """
+    Passed a search query this method returns the list of artist matching this search term
+    @param search_query: String term we are looking for artist with this string.
+    @return: list of artist models with this search term in their name
+    """
+    return __artist_data.search_artists_by_name(search_query)
 
 
 def get_all_artists():
@@ -17,7 +27,17 @@ def get_all_artists():
 
 
 def find_path_between_artists(artist_name):
+    """
+    This method finds the path between artists. a path is a combination of artists and films that connects this artist
+    with Kevin Bacon
+
+    @param artist_name: name of the artist we want to find his/her path to Kevin Bacon
+    @return: list of jsonified artist and films model
+    """
     path = shortest_link(artist_name)
+
+    # now that we have the path now create a list of artist and models models
+    # each item in path is a tuple of (artist, film)
     final_path = []
     for path_item in path:
         actor_name = path_item[0]
@@ -26,9 +46,11 @@ def find_path_between_artists(artist_name):
         movie = __artist_data.get_movie_by_id(movie_id)
 
         if movie is not None:
+            # first item in the tuple is always without movie since it's the starting artist
             final_path.append(jsonify_movie_model(movie))
         final_path.append(jsonify_artist_model(actor_model))
 
+    current_app.logger.info(u'The path from {0} to KB has {1} items'.format(artist_name, len(path)))
     return final_path
 
 
@@ -43,7 +65,7 @@ def shortest_link(actor_name):
     # First, check if the actor's name is 'Kevin Bacon' or if the actor is
     # not present in the 'actor_dict'. If either of them if True
     # then return the empty list.
-    if actor_name == 'Kevin Bacon' or not __artist_data.artist_exist(actor_name):
+    if actor_name.lower() == 'kevin bacon' or not __artist_data.artist_exist(actor_name):
         return []
 
     # get the actor from our list
@@ -65,9 +87,7 @@ def shortest_link(actor_name):
         # actor link is a list of tuple, example:
         # [(actor_model, movie_model), (actor_model2, movie_model2)]
         actor_name = actor_link[len(actor_link) - 1][0]
-        current_app.logger.info(u"-----> check path")
         for movie_id in __artist_data.get_all_films_for_artist(actor_name):
-            current_app.logger.info(u"---->{0}".format(movie_id))
             movie = __artist_data.get_movie_by_id(movie_id)
             for co_star in movie.casts:
 
@@ -89,7 +109,7 @@ def shortest_link(actor_name):
                         full_link.append((co_star_name, movie.id))
                         to_investigate.append(full_link)
 
-        # Remove the actor_link (sublist) from the
-        # to_investigate (nested list)
+        # Remove the actor_link from the to_investigate since we just investigated this artist
+        # getting here means this artist didn't help in finding Kevin Bacon
         to_investigate.remove(actor_link)
     return []
