@@ -20,9 +20,13 @@ window.ArtistListView = Backbone.View.extend({
         // clear the list
         $(this.el).empty();
         console.log("Search results total=" + this.model.models.length);
-        _.each(this.model.models, function (artist) {
-            $(this.el).append(new ArtistListItemView({model:artist}).render().el);
-        }, this);
+        if (this.model.models.length >> 0) {
+            _.each(this.model.models, function (artist) {
+                $(this.el).append(new ArtistListItemView({model:artist}).render().el);
+            }, this);
+        } else {
+            $(this.el).append('<li class="text-center">No Resutls</li>');
+        }
         return this;
     }
 });

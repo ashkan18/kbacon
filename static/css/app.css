@@ -1,7 +1,7 @@
 .dropdown-menu {
     max-height: 500px;
     overflow-y: scroll;
-    width: 220px;
+    width: 230px;
 }
 
 .list-item {
@@ -13,6 +13,7 @@
     top: 15%;
     left: 5%;
 }
+
 
 .navbar{
     height: 300px;

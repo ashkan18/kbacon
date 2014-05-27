@@ -1,28 +1,33 @@
 <div class="row">
-    <h2> <%= id %> degree of separation is <%= distance %></h2>
+    <h2 class="text-center"> <%= id %> degree of separation is <%= distance %></h2>
 </div>
-<div class="row" id="paths">
-    <% _.each(path, function(path_item){%>
+<div class="row text-center" id="paths">
+    <% _.each(path, function(path_item, i){%>
     <% if (path_item['image'] === '') {
         // if this artist doesn't have an image show default image
         path_item['image'] = 'images/no-artist.png';
     }
-
-    var col_size = 2;
-    if (path.length > 6) {
-        col_size = 1;
-    }
+    var col_size = Math.floor(12/(path.length));
     %>
 
     <div class="col-xs-<%= col_size %>">
-        <% if (path_item['type'] === 1) { %>
-        <img src="<%= path_item['image'] %>" class="img-circle img-responsive fadeIn"/>
-        <% } else if (path_item['type'] === 2) { %>
-        <img src="<%= path_item['image'] %>" class="img-rounded img-responsive fadeIn"/>
-        <% } %>
-        <div class="caption">
+            <div class="row">
+                <div class="span4"></div>
+                <div class="span4">
+                    <% if (path_item['type'] === 1) { %>
+                    <img src="<%= path_item['image'] %>" class="img-circle img-responsive fadeIn center-block"/>
+                    <% } else if (path_item['type'] === 2) { %>
+                    <img src="<%= path_item['image'] %>" class="img-rounded img-responsive fadeIn center-block"/>
+                    <% } %>
+
+                </div>
+                <div class="span4"></div>
+            </div>
+
+        <div class="caption center-block">
             <h4><%= path_item['name'] %></h4>
         </div>
+
     </div>
     <% }); %>
 
