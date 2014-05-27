@@ -37,7 +37,6 @@ window.Router = Backbone.Router.extend({
 });
 
 
-
 // this is defined in templateLoader.js
 templateLoader.load(["HomeView", "HeaderView", 'ArtistListItemView', 'ArtistView'],
     function () {
