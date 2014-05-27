@@ -1,16 +1,25 @@
 .dropdown-menu {
-    max-height: 900px;
+    max-height: 500px;
     overflow-y: scroll;
     width: 220px;
 }
 
 .list-item {
     padding-top: 6px;
-    padding-left: 56px;
 }
 
 #pleaseWaitDialog {
     position: absolute;
     top: 15%;
     left: 5%;
+}
+
+.navbar{
+    height: 300px;
+    background-image: url('../images/header.jpg');
+}
+@media (max-width: 979px) {
+    .navbar {
+        padding-top: 0px;
+    }
 }
