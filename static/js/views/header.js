@@ -28,10 +28,12 @@ window.HeaderView = Backbone.View.extend({
     search: function () {
         var key = $('#searchText').val();
         console.log('search ' + key);
-        this.searchResults.findByName(key);
-        setTimeout(function () {
-            $('.dropdown').addClass('open');
-        });
+        if (key.length > 3) {
+            this.searchResults.findByName(key);
+            setTimeout(function () {
+                $('.dropdown').addClass('open');
+            });
+        }
     },
 
     onkeypress: function (event) {
