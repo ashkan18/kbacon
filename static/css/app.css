@@ -23,3 +23,22 @@
         padding-top: 0px;
     }
 }
+
+.fadeIn {
+    -webkit-animation: fadeIn 5s; /* Chrome, Safari, Opera */
+    animation: myfirst 5s;
+}
+
+
+@-webkit-keyframes fadeIn
+{
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+/* Standard syntax */
+@keyframes fadeIn
+{
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
