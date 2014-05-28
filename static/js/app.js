@@ -18,6 +18,7 @@ window.Router = Backbone.Router.extend({
     // showing the landing page content
     home: function () {
         // render home page by creating home view
+        console.log("Show home page");
         this.homeView = new HomeView();
     },
 
@@ -29,7 +30,7 @@ window.Router = Backbone.Router.extend({
         artist.fetch({
             success: function (data) {
                 $('#pleaseWaitDialog').modal('hide');
-                console.log("Artist detail:" + JSON.stringify(data));
+                console.log("Artist detail received." );
                 $('#content').html(new ArtistView({model: data}).render().el);
             }
         });

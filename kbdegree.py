@@ -54,7 +54,7 @@ def find_path(artist_name):
     """
     app.logger.info(u"Get artist info by name: {0}".format(artist_name))
     path = artists_services.find_path_between_artists(artist_name)
-    return jsonify(path=path)
+    return jsonify(path=path, artist_name=artist_name)
 
 
 @app.route('/api/artists/', methods=['GET'])

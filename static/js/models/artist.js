@@ -23,8 +23,6 @@ window.ArtistCollection = Backbone.Collection.extend({
             url:url,
             dataType:"json",
             success:function (data) {
-                console.log("---->" + data['artists'].length);
-                console.log("search success: " + JSON.stringify(data['artists']));
                 self.reset(data['artists']);
             }
         });
