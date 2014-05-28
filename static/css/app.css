@@ -11,6 +11,10 @@
     background: #FFFFFF url('../images/header.jpg') no-repeat;
 }
 
+.navbar-right .dropdown-menu {
+    right: auto;
+}
+
 .dropdown-menu {
     max-height: 500px;
     overflow-y: scroll;
