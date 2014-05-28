@@ -51,11 +51,8 @@ window.SearchListView = Backbone.View.extend({
             }, this);
         } else {
             // if search results was empty, show "No Results"
-            //$(this.el).append('<li class="text-center">No Resutls</li>');
-            $(this.el).empty();
+            this.clearResults();
         }
-
-
 
         return this;
     },
