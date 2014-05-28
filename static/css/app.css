@@ -15,9 +15,13 @@
     right: auto;
 }
 
-.dropdown-menu {
+.search_dropdown {
     max-height: 500px;
     overflow-y: scroll;
+}
+
+.search_dropdown>li>a {
+    padding-left: 7px;
 }
 
 .list-item {

@@ -6,7 +6,7 @@ window.SearchListView = Backbone.View.extend({
 
     tagName:'ul',
 
-    className: 'dropdown-menu',  // we want to show the results in dropdown menu
+    className: 'dropdown-menu search_dropdown',  // we want to show the results in dropdown menu
 
     SEARCH_DROPDOWN_SELECTOR: '.dropdown',
     SEARCH_DELAY: 500,
