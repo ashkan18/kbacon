@@ -13,6 +13,7 @@ def jsonify_artist_model(artist_model):
     else:
         artist_model.info['image'] = ''
     artist_json['type'] = ModelTypes.ARTIST
+    artist_json['id'] = artist_model.id
     return artist_json
 
 
