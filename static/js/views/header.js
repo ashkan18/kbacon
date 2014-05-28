@@ -21,11 +21,14 @@ window.HeaderView = Backbone.View.extend({
     },
 
     events: {
+        // we want to search each time user adds a character to search input
         "keyup .search-query": "search",
         "keypress .search-query": "onkeypress"
     },
 
     search: function () {
+        // when user inputs in search text input, we check if search text is > 3 characters
+        // we search the server, the reason is we get lot of results for less than 3 characters
         var key = $('#searchText').val();
         console.log('search ' + key);
         if (key.length > 3) {
@@ -44,6 +47,7 @@ window.HeaderView = Backbone.View.extend({
     },
 
     select: function(menuItem) {
+        // show items as selected when mouse over
         $('.nav li').removeClass('active');
         $('.' + menuItem).addClass('active');
     }

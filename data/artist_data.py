@@ -136,5 +136,10 @@ class ArtistData(object):
                     if search_query.lower() in artist_model.info['name'].lower())
 
     def get_cast_id_for_name(self, cast_name):
+        """
+        Given a cast name, this method will return the unique id associated with this name
+        @param cast_name: String name of the artist we want to get his/her unique id
+        @return: String id of this cast
+        """
         return hashlib.sha1(cast_name.lower().encode('utf-8')).hexdigest()
 

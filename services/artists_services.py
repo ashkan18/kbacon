@@ -23,11 +23,12 @@ def search_artists(search_query):
 
 
 def get_artist_by_id(artist_id):
+    """
+    This method returns an ArtistModel for this artist_id
+    @param artist_id: String id of the artist we are looking for
+    @return: ArtistModel of this artist_id
+    """
     return __artist_data.get_artist_by_id(artist_id)
-
-
-def get_all_artists():
-    pass
 
 
 def find_path_between_artists(artist_id):
@@ -118,3 +119,9 @@ def shortest_link(actor_id):
         # getting here means this artist didn't help in finding Kevin Bacon
         to_investigate.remove(actor_link)
     return []
+
+
+def get_all_artists():
+    #TODO: implement this when it's needed
+    pass
+
