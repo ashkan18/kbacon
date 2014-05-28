@@ -14,6 +14,9 @@
     left: 5%;
 }
 
+.col-xs-1 {
+    margin-left: 50px; /* when we use 12 item grid on artist page this we need to add margin to center thing */
+}
 
 .navbar{
     height: 300px;
