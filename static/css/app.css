@@ -14,7 +14,6 @@
 .dropdown-menu {
     max-height: 500px;
     overflow-y: scroll;
-    width: 200px;
 }
 
 .list-item {
@@ -23,7 +22,7 @@
 
 #pleaseWaitDialog {
     position: absolute;
-    top: 15%;
+    top: 45%;
     left: 5%;
 }
 

@@ -30,7 +30,6 @@ window.Router = Backbone.Router.extend({
         artist.fetch({
             success: function (data) {
                 $('#pleaseWaitDialog').modal('hide');
-                console.log("Artist detail received." );
                 $('#content').html(new ArtistView({model: data}).render().el);
             }
         });
@@ -39,7 +38,7 @@ window.Router = Backbone.Router.extend({
 
 
 // this is defined in templateLoader.js
-templateLoader.load(["HomeView", "HeaderView", 'ArtistListItemView', 'ArtistView'],
+templateLoader.load(["HomeView", "HeaderView", 'SearchListItemView', 'ArtistView'],
     function () {
         // after loading templates now start the app
         app = new Router();
