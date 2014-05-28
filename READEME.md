@@ -39,3 +39,14 @@ possibly means using lot of memory of the server, In next phase I will switch to
 it would be cool if I use d3 to show visually better relations.
 
 - Add fav.ico: Missing it now
+
+
+Run the app locally
+===========
+You can run the app locally by running
+
+    python kbdegree.py
+
+This will run the server on port 5000 and you can access the main page on:
+http://localhost:5000/static/index.html
+
