@@ -1,3 +1,4 @@
+import hashlib
 from os import listdir
 import os
 from os.path import join, isfile
@@ -56,38 +57,41 @@ class ArtistData(object):
                 if 'cast' in json_data and len(json_data['cast']) > 0:
                     for cast in json_data['cast']:
                         # create a new artist model from the cast info
-                        artist_model = ArtistModel(cast)
+                        # we assign a new id for this artist to avoid issues with getting artist by name
+                        cast_name = cast['name']
+                        cast_uuid = self.get_cast_id_for_name(cast_name)
+                        artist_model = ArtistModel(cast_uuid, cast)
 
-                        if artist_model.info['name'] not in artist_dict:
+                        if artist_model.id not in artist_dict:
                             # first time seeing this artist,
                             # we haven't had this artist in the dict yet
                             # add them to the dict
                             artist_model.films.append(film_uuid)
-                            artist_dict[artist_model.info['name']] = artist_model
+                            artist_dict[artist_model.id] = artist_model
                         else:
                             # we already had this artist before
                             # no need to update the info, just add the film
-                            artist_dict[artist_model.info['name']].films.append(film_uuid)
+                            artist_dict[artist_model.id].films.append(film_uuid)
                 else:
                     current_app.logger.info(u"Movie {0} had no cast".format(movie_model.info['name']))
             else:
                 current_app.logger.info(u"Missing film in json: {0}".format(json_data))
 
-    def artist_exist(self, artist_name):
+    def artist_exist(self, artist_id):
         """
         This method given an artist name makes sure artist exist in our artist dict or not
-        @param artist_name: string name of the artist we are looking for
+        @param artist_id: unique id of the artist we are looking for
         @return: boolean showing if artist exist in our system or not
         """
-        return artist_name in artist_dict
+        return artist_id in artist_dict
 
-    def get_all_films_for_artist(self, artist_name):
+    def get_all_films_for_artist(self, artist_id):
         """
         This python generator reads list of films of an artist
-        @param artist_name: name of the artist we are looking for their films
+        @param artist_id: id of the artist we are looking for their films
         @return: next film model
         """
-        for film in artist_dict[artist_name].films:
+        for film in artist_dict[artist_id].films:
             yield film
 
     def get_movie_by_id(self, movie_id):
@@ -108,8 +112,17 @@ class ArtistData(object):
         @param artist_name: string name of the artist we are looking for
         @return: ArtistModel if exist and None if we don't have this artist
         """
-        if artist_name in artist_dict:
-            return artist_dict[artist_name]
+        artist_id = self.get_cast_id_for_name(artist_name)
+        return self.get_artist_by_id(artist_id)
+
+    def get_artist_by_id(self, artist_id):
+        """
+        Passed an artist name this method returns the artist model
+        @param artist_name: string name of the artist we are looking for
+        @return: ArtistModel if exist and None if we don't have this artist
+        """
+        if artist_id in artist_dict:
+            return artist_dict[artist_id]
         else:
             return None
 
@@ -120,4 +133,8 @@ class ArtistData(object):
         @return: list of ArtistModels matching this search
         """
         return list(artist_model for artist_name, artist_model in artist_dict.iteritems()
-                    if search_query.lower() in artist_name.lower())
+                    if search_query.lower() in artist_model.info['name'].lower())
+
+    def get_cast_id_for_name(self, cast_name):
+        return hashlib.sha1(cast_name.lower().encode('utf-8')).hexdigest()
+

@@ -25,7 +25,7 @@ window.ArtistView = Backbone.View.extend({
             // and then divide it by two to get the actual distance
             var distance = (path.length - 1) / 2;
             console.log("path received for this artist"+ path);
-            $(this.el).append(this.template({'distance': distance, 'path':path, 'id': this.model.toJSON()['id']}));
+            $(this.el).append(this.template({'distance': distance, 'path':path, 'name': this.model.toJSON()['artist_name']}));
         }
         return this;
     }

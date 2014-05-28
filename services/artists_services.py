@@ -22,27 +22,31 @@ def search_artists(search_query):
     return __artist_data.search_artists_by_name(search_query)
 
 
+def get_artist_by_id(artist_id):
+    return __artist_data.get_artist_by_id(artist_id)
+
+
 def get_all_artists():
     pass
 
 
-def find_path_between_artists(artist_name):
+def find_path_between_artists(artist_id):
     """
     This method finds the path between artists. a path is a combination of artists and films that connects this artist
     with Kevin Bacon
 
-    @param artist_name: name of the artist we want to find his/her path to Kevin Bacon
+    @param artist_id: unique id of the artist we want to find his/her path to Kevin Bacon
     @return: list of jsonified artist and films model
     """
-    path = shortest_link(artist_name)
+    path = shortest_link(artist_id)
 
     # now that we have the path now create a list of artist and models models
     # each item in path is a tuple of (artist, film)
     final_path = []
     for path_item in path:
-        actor_name = path_item[0]
+        actor_id = path_item[0]
         movie_id = path_item[1]
-        actor_model = __artist_data.get_artist_by_name(actor_name)
+        actor_model = __artist_data.get_artist_by_id(actor_id)
         movie = __artist_data.get_movie_by_id(movie_id)
 
         if movie is not None:
@@ -50,11 +54,11 @@ def find_path_between_artists(artist_name):
             final_path.append(jsonify_movie_model(movie))
         final_path.append(jsonify_artist_model(actor_model))
 
-    current_app.logger.info(u'The path from {0} to KB has {1} items'.format(artist_name, len(path)))
+    current_app.logger.info(u'The path from {0} to KB has {1} items'.format(artist_id, len(path)))
     return final_path
 
 
-def shortest_link(actor_name):
+def shortest_link(actor_id):
     """Return a list of actors (actors are strings)that represents the shortest
     connection between 'actor_name' and Kevin Bacon that can be found in the
     dictionaries: 'actor_dict' and 'movie_dict'.
@@ -65,12 +69,13 @@ def shortest_link(actor_name):
     # First, check if the actor's name is 'Kevin Bacon' or if the actor is
     # not present in the 'actor_dict'. If either of them if True
     # then return the empty list.
-    if actor_name.lower() == 'kevin bacon' or not __artist_data.artist_exist(actor_name):
+    kevin_bacon_artist_id = __artist_data.get_cast_id_for_name('kevin bacon')
+    if actor_id == kevin_bacon_artist_id or not __artist_data.artist_exist(actor_id):
         return []
 
     # get the actor from our list
-    investigated = [actor_name]
-    to_investigate = [[(actor_name, '')]]
+    investigated = [actor_id]
+    to_investigate = [[(actor_id, '')]]
 
     # The loop condition checks if the list to_investigate has any remaining
     # elements.
@@ -86,27 +91,27 @@ def shortest_link(actor_name):
         # get the actor name from the actor link
         # actor link is a list of tuple, example:
         # [(actor_model, movie_model), (actor_model2, movie_model2)]
-        actor_name = actor_link[len(actor_link) - 1][0]
-        for movie_id in __artist_data.get_all_films_for_artist(actor_name):
+        actor_id = actor_link[len(actor_link) - 1][0]
+        for movie_id in __artist_data.get_all_films_for_artist(actor_id):
             movie = __artist_data.get_movie_by_id(movie_id)
             for co_star in movie.casts:
-
+                co_star_name = co_star['name']
+                co_star_id = __artist_data.get_cast_id_for_name(co_star_name)
                 # if we haven't checked this co-star yet
                 if not (co_star in investigated):
-                    co_star_name = co_star['name']
                     if co_star_name == "Kevin Bacon":
                         # Kevin Bacon was in the list, yesss we found him!!
-                        actor_link.append(("Kevin Bacon", movie.id))
+                        actor_link.append((kevin_bacon_artist_id, movie.id))
                         return actor_link
 
                     # If the co_star is not present in the list of
                     # investigated actors then make a list containing
                     # the entire link from 'actor_name' to the co_star
                     # and add it to the nested list 'to_investigate'.
-                    elif not (co_star_name in investigated):
-                        investigated.append(co_star_name)
+                    elif not (co_star_id in investigated):
+                        investigated.append(co_star_id)
                         full_link = actor_link[:]
-                        full_link.append((co_star_name, movie.id))
+                        full_link.append((co_star_id, movie.id))
                         to_investigate.append(full_link)
 
         # Remove the actor_link from the to_investigate since we just investigated this artist
