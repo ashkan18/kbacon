@@ -19,8 +19,12 @@ a charitable organization named <a href="http://SixDegrees.org">SixDegrees.org
 
 About The Code
 =========
-This app is written in Python(Flask), Bootstrap and Backbone.
+This app is written in Python(Flask), Bootstrap and Backbone. For testing on the back-end I've used Flask-Testing and
+nosetest for getting the code coverage of the tests.
 
+Back-end Design
+---------
+Backend is all based on python flask microframework.
 On the back-end, we have three layers.
     . Interface layer: Where we define the routes and endpoints</li>
     . Services layer: Where we have the core logic for example finding the path from each artist to Kevin Bacon

@@ -1,7 +1,7 @@
 # coding=utf-8
 import os
 import unittest
-from data.artist_data import ArtistData
+from kbdegreesvc.data.artist_data import ArtistData
 from test.logger import logger
 
 __author__ = 'Ashkan'
@@ -102,8 +102,3 @@ class ArtistDataSuite(unittest.TestCase):
 
         # make sure garbage does not exist!
         self.assertFalse(self.artist_data.artist_exist("garbage"), "make sure tom hanks exist")
-
-
-
-
-

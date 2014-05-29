@@ -1,9 +1,9 @@
 from flask import Flask
-from services import artists_services
-from helpers.json_helper import ModelTypes
+from kbdegreesvc.services import artists_services
+from kbdegreesvc.helpers.json_helper import ModelTypes
 
 __author__ = 'Ashkan'
-from test.logger import logger
+
 from flask.ext.testing import TestCase
 
 SEAN_PENN_ARTIST_ID = '57e379d456c58ed96b6673eab7730308dc08c582'
@@ -96,4 +96,3 @@ class ArtistServiceSuite(TestCase):
         """
         garbage_model = artists_services.get_artist_by_id('garbage')
         self.assertIsNone(garbage_model, "Test garbage model")
-

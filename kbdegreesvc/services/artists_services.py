@@ -3,8 +3,8 @@ This module defines all the methods needed for getting artists and their related
 
 """
 
-from data.artist_data import ArtistData
-from helpers.json_helper import jsonify_artist_model, jsonify_movie_model
+from kbdegreesvc.data.artist_data import ArtistData
+from kbdegreesvc.helpers.json_helper import jsonify_artist_model, jsonify_movie_model
 from flask import current_app
 
 __author__ = 'Ashkan'
@@ -126,4 +126,5 @@ def shortest_link(actor_id):
 def get_all_artists():
     #TODO: implement this when it's needed
     pass
+
 

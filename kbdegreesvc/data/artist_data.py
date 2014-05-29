@@ -5,8 +5,8 @@ from os.path import join, isfile
 import json
 import uuid
 from flask import current_app
-from model.artist_model import ArtistModel
-from model.movie_model import MovieModel
+from kbdegreesvc.model.artist_model import ArtistModel
+from kbdegreesvc.model.movie_model import MovieModel
 
 __author__ = 'Ashkan'
 
@@ -14,7 +14,7 @@ artist_dict = {}
 film_dict = {}
 
 
-FILMS_FOLDER_PATH = os.path.join(os.path.dirname(__file__), '../films/')
+FILMS_FOLDER_PATH = os.path.join(os.path.dirname(__file__), '../../films/')
 
 
 class ArtistData(object):
@@ -151,4 +151,3 @@ class ArtistData(object):
         @return: String id of this cast
         """
         return hashlib.sha1(cast_name.lower().encode('utf-8')).hexdigest()
-

@@ -1,13 +1,14 @@
 import os
-from services import artists_services
-from helpers.json_helper import jsonify_artist_model
+from flask import Flask, jsonify, request
+
+from kbdegreesvc.services import artists_services
+from kbdegreesvc.helpers.json_helper import jsonify_artist_model
 
 __author__ = 'Ashkan'
 
-from flask import Flask, jsonify, request
 
-# create a new flask applicationn
-app = Flask(__name__)
+# create a new flask application
+app = Flask(__name__, static_folder='{0}/static'.format(os.path.dirname(__file__)))
 app.debug = True
 
 # log to stderr
@@ -16,7 +17,6 @@ from logging import StreamHandler
 file_handler = StreamHandler()
 app.logger.setLevel(logging.DEBUG)  # set the desired logging level here
 app.logger.addHandler(file_handler)
-
 
 @app.route('/api/artists/search/', methods=['GET'])
 def search_artists():
