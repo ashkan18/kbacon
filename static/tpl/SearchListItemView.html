@@ -1,5 +1,5 @@
 <a href='#artist/<%= id %>'>
-    <% if (image !== '') { %>
+    <% if (typeof(image) != 'undefined' && image !== '') { %>
     <img width="40" height="40" src="<%= image %>" class="img-rounded" style="float:left;"/>
     <% } else { //we don't have artist image, show default %>
     <img width="40" height="40" src="images/no-artist.png" class="img-rounded" style="float:left;"/>
