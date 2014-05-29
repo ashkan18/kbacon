@@ -92,3 +92,4 @@ You can run the app locally by running
 
 This will run the server on port 5000 and you can access the main page on:
 http://localhost:5000/static/index.html
+
