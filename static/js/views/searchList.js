@@ -111,7 +111,7 @@ window.SearchListView = Backbone.View.extend({
     },
 
     keyDown: function(e) {
-        if (event.keyCode == 27) return this.hide();
+        if (e.keyCode == 27) return this.hide();
         return true;
     },
 
