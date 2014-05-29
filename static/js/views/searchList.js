@@ -10,7 +10,6 @@ window.SearchListView = Backbone.View.extend({
 
     SEARCH_DROPDOWN_SELECTOR: '.dropdown',
     SEARCH_DELAY: 500,
-    SEARCH_FIELD_SELECTOR: "#searchText",
     MINIMUM_SEARCH_LENGTH: 2,
 
 
@@ -38,12 +37,18 @@ window.SearchListView = Backbone.View.extend({
     },
 
     render:function () {
-        this.input = $(this.SEARCH_FIELD_SELECTOR);
+        // get the input text from DOM
+        this.input = $(this.input_id);
+
+        // set the width of this drop down to the parent text box
         this.$el.width(this.input.outerWidth());
+
+        // define key functions for this search text box
         this.input
             .keyup(_.bind(this.checkToSearch, this))
             .keydown(_.bind(this.keyDown, this))
             .after(this.$el);
+
         // clear the list
         $(this.el).empty();
 

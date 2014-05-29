@@ -4,10 +4,11 @@
  */
 window.HeaderView = Backbone.View.extend({
     el: '#header',
+    SEARCH_FIELD_SELECTOR: "#searchText",
 
     initialize: function () {
         // define search result and the view for showing the results
-        this.searchresultsView = new SearchListView();
+        this.searchresultsView = new SearchListView({input_id: '#searchText'});
         // render the header section in init
         this.render();
     },
