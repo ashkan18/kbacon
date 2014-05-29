@@ -81,7 +81,7 @@ possibly means using lot of memory of the server, In next phase I will switch to
 - Use d3 for showing a graph: Right now I'm only using images to show the relation between artists and movies,
 it would be cool if I use d3 to show visually better relations.
 
-- Add fav.ico: Missing it now
+- Add favicon: Missing it now
 
 
 Run the app locally
