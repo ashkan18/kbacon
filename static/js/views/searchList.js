@@ -57,6 +57,8 @@ window.SearchListView = Backbone.View.extend({
             _.each(this.model.models, function (artist) {
                 $(this.el).append(new SearchListItemView({model:artist}).render().el);
             }, this);
+            // open the dropdown
+            $(this.SEARCH_DROPDOWN_SELECTOR).addClass('open');
         } else {
             // if search results was empty, show "No Results"
             this.clearResults();
@@ -102,9 +104,6 @@ window.SearchListView = Backbone.View.extend({
             this.searchResults.fetch({
                 type: 'GET',
                 data: {'query': searchTerm}
-            });
-            setTimeout(function () {
-                $('.dropdown').addClass('open');
             });
         } else {
             this.clearResults();
