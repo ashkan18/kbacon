@@ -10,6 +10,7 @@ window.Artist = Backbone.Model.extend({
 
 });
 
+
 window.ArtistSearchCollection = Backbone.Collection.extend({
     /**
      * This is the collection for getting list of artists,
@@ -21,7 +22,14 @@ window.ArtistSearchCollection = Backbone.Collection.extend({
 
     parse: function( dataResponse ) {
         // we need to send artists back from the response we got
+        this.sort();
         return dataResponse.artists;
+    },
+
+    comparator: function(artistModel) {
+        return artistModel.get('name');
     }
 
 });
+
+
