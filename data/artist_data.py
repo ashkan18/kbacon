@@ -28,10 +28,19 @@ class ArtistData(object):
         This method iterates through list of json files in films folder and reads each of them
         to populate artist and film dictionaries
         """
+        # clear the data first
+        self.__clear_data()
         for f in listdir(FILMS_FOLDER_PATH):
             file_full_path = join(FILMS_FOLDER_PATH, f)
             if isfile(file_full_path):
                 self.__read_file(file_full_path)
+
+    def __clear_data(self):
+        """
+        This method will clear the data dictionaries
+        """
+        artist_dict.clear()
+        film_dict.clear()
 
     def __read_file(self, json_file):
         """
