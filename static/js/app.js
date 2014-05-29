@@ -18,7 +18,6 @@ window.Router = Backbone.Router.extend({
     // showing the landing page content
     home: function () {
         // render home page by creating home view
-        console.log("Show home page");
         this.homeView = new HomeView();
     },
 

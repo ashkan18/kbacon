@@ -4,7 +4,6 @@ window.HomeView = Backbone.View.extend({
      * This class handles showing the content of the main page
      */
     initialize:function () {
-        console.log('Initializing Home View');
         this.render();
     },
 
