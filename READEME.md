@@ -60,7 +60,8 @@ based template and will put the result in a div with 'content' as it's id.
 - 'artist/:id': This route will fetch an artist from the server using Artist model. Then passes the result of fetching
 artist details to ArtistView which will render the artist path to Kevin Bacon and update the #content div.
 
-HeaderView is the view that handles rendering the header area, it creates a new SearchListView.
+HeaderView is the view that handles rendering the header area, it creates a new SearchListView and passes the id of
+the search text input element, this way SearchListView is more modular and can be used by any other view.
 
 SearchListView is responsible for the functionality of the instant search. On the keyup of the keyboard
 on the search box, it will wait 1 second if the user has not added any more characters it will make a call to server to
@@ -68,6 +69,9 @@ get a list of artists with this input text in their name and shows the results a
 
 SearchListView uses ArtistSearchCollection for calling the server and getting list of artists.
 
+**templateLoader.js**: This file has a method that handles loading the template html files from tpl folder (by making
+ajax get calls) and read the html and sets them for their proper view. This way we can have a separate folder containing
+the templates.
 
 Improvements to make
 ===========
