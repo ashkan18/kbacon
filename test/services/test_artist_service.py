@@ -1,5 +1,5 @@
 from flask import Flask
-import artists_services
+from services import artists_services
 from helpers.json_helper import ModelTypes
 
 __author__ = 'Ashkan'
@@ -79,4 +79,21 @@ class ArtistServiceSuite(TestCase):
         path = artists_services.shortest_link(KEVIN_BACON_ARTIST_ID)
         self.assertEqual(len(path), 0, "Test path is empty for kevin bacon!")
 
+    def test_get_artist_by_id_success(self):
+        """
+            Test successful get artist by id
+        """
+        # make sure we can get sean penn and kevin bacon
+        sean_penn_model = artists_services.get_artist_by_id(SEAN_PENN_ARTIST_ID)
+        kevin_bacon_model = artists_services.get_artist_by_id(KEVIN_BACON_ARTIST_ID)
+
+        self.assertIsNotNone(sean_penn_model, "Find Sean Penn")
+        self.assertIsNotNone(kevin_bacon_model, "Find Kevin Bacon")
+
+    def test_get_artist_by_id_fail(self):
+        """
+            Test get artist by id failure by checking for 'garbage'
+        """
+        garbage_model = artists_services.get_artist_by_id('garbage')
+        self.assertIsNone(garbage_model, "Test garbage model")
 

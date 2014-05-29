@@ -1,6 +1,7 @@
 # coding=utf-8
+import os
 import unittest
-from artist_data import ArtistData
+from data.artist_data import ArtistData
 from test.logger import logger
 
 __author__ = 'Ashkan'
@@ -13,9 +14,12 @@ class ArtistDataSuite(unittest.TestCase):
         logger.info("Firing up artist_data unit test suite ...")
 
     def setUp(self):
+
+        json_file_location = os.path.join(os.path.dirname(__file__), 'forrestgump.json')
+
         self.artist_data = ArtistData()
         self.artist_data._ArtistData__clear_data()
-        self.artist_data._ArtistData__read_file('forrestgump.json')
+        self.artist_data._ArtistData__read_file(json_file_location)
 
     def test_get_cast_id_for_name(self):
         """

@@ -42,7 +42,9 @@ def find_path_between_artists(artist_id):
     path = shortest_link(artist_id)
 
     # now that we have the path now create a list of artist and models models
-    # each item in path is a tuple of (artist, film)
+    # each item in path is a tuple of (artist, film) exampl;
+    # [(u'57e379d456c58ed96b6673eab7730308dc08c582', ''),
+    #  ('e3a27d5c32004005c1d0fb39172c2a02f3c7f1c4', UUID('78d7761c-e741-11e3-a1d1-000c2953ae0f'))]
     final_path = []
     for path_item in path:
         actor_id = path_item[0]
