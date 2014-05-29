@@ -19,12 +19,15 @@ window.SearchListView = Backbone.View.extend({
 
         var self = this;
 
+        // get the search results using ArtistSearchCollection object
         this.searchResults = new ArtistSearchCollection();
 
         this.model = this.searchResults;
 
+        // when the model (artist collection) is reset then call render
         this.model.bind("reset", this.render, this);
 
+        // when something is added to the model, add it to the list as search list item view
         this.model.bind("add", function (artist) {
             $(self.el).append(new SearchListItemView({model:artist}).render().el);
         });
