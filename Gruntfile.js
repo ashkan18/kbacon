@@ -8,8 +8,8 @@ module.exports = function(grunt) {
       },
       dist: {
         src: ['src/lib/jquery.min.js',
-            'src/lib/underscore-min.js',
-            'src/lib/backbone-min.js',
+              'src/lib/underscore-min.js',
+              'src/lib/backbone-min.js',
               'src/lib/bootstrap.js',
               'src/templateLoader.js',
               'src/models/*.js',
