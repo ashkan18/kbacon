@@ -1,1 +1,1 @@
-web: gunicorn kbdegreesvc.kbdegree:app
+web: gunicorn kbdegreesvc:app
