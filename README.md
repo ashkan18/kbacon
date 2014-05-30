@@ -58,8 +58,7 @@ These will run unittest and also give the current code coverage of the tests. Cu
 
 Front-end Design
 -----------
-On the front-end, I used bootstrap to get the proper layout and css classes, and used backbone for handling client side
-logic, calling to server and render the ui. I've also used Grunt to concat and minify the javascript code, after running grunt all the javascript files and their dependencies will end up in one KBDegree.min.js file under static/js.
+On the front-end, I used **bootstrap** to get the proper layout and css classes, and used **backbone** and **underscore** for handling client side logic, calling to server and render the ui (mvc). I've also used **Grunt** to concat and minify the javascript code, after running grunt all the javascript files and their dependencies will end up in one KBDegree.min.js file under static/js.
 
 We have an index.html which basically imports one KBDegree.min.js script. You can see the actual different sources of this script under src/ folder. Here is a little more details about files under src:
 
@@ -79,11 +78,11 @@ get a list of artists with this input text in their name and shows the results a
 
 SearchListView uses ArtistSearchCollection for calling the server and getting list of artists.
 
-**templateLoader.js**: This file has a method that handles loading the template html files from tpl folder (by making
+templateLoader.js: This file has a method that handles loading the template html files from tpl folder (by making
 ajax get calls) and read the html and sets them for their proper view. This way we can have a separate folder containing
 the templates.
 
-**Frontend Unittest**: THIS IS A WORK IN PROGRESS, but for now I have set up Jasmine and sinos for testing my backbone based application. You can find a sample of a test under /test/js. The main problem with setting up the test right now is the fact that I'm rendering templates from files and Jasmine has issues getting the files. This issue will be fixed once I use grunt to pre-generate the templates. You can run the test by opening test/js/specRunner.html
+**Frontend Unittest**: THIS IS A WORK IN PROGRESS, but for now I have set up **Jasmine** and **sinon** for testing my backbone based application. You can find a sample of a test under /test/js. The main problem with setting up the test right now is the fact that I'm rendering templates from files and Jasmine has issues getting the files. This issue will be fixed once I use grunt to pre-generate the templates. You can run the test by opening test/js/specRunner.html
 
 Improvements to make
 ===========
