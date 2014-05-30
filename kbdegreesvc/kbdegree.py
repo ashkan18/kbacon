@@ -8,7 +8,7 @@ __author__ = 'Ashkan'
 
 
 # create a new flask application
-app = Flask(__name__, static_folder='{0}/static'.format(os.path.dirname(__file__)))
+app = Flask(__name__, static_folder='{0}/../static'.format(os.path.dirname(__file__)))
 app.debug = True
 
 # log to stderr
