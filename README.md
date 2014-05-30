@@ -23,7 +23,7 @@ nosetest for getting the code coverage of the tests.
 
 Back-end Design
 ---------
-Backend is all based on python flask micro-framework. The code starts from kbdegree.py file. In this file we create a
+Backend is all based on python flask micro-framework. You can find the back-end code under kbdegreesvc folder. The code starts from kbdegree.py file. In this file we create a
 new flask application and define all the endpoints. We have two important endpoints there
 - search_artist: gets a 'query' as get request parameter and returns a list of artist with the query in their name
 - find_path: gets artist id in the path and based on that returns a path from that artist id to Kevin Bacon
