@@ -49,8 +49,10 @@ I also have helper method json_helper.py which takes care of creating json resul
 **Backend Testing**: I have used Flask-Testing and python unittest modules for handling test cases. You can find python unit test files under:
 /test/data and test/services
 under each folder you can run:
+
     nosetests -v --with-coverage --cover-package=data --logging-level=CRITICAL
     nosetests -v --with-coverage --cover-package=services --logging-level=CRITICAL
+
 These will run unittest and also give the current code coverage of the tests. Current code coverage on first suite is 83% and on second suite is 94%
 
 Front-end Design
@@ -80,7 +82,7 @@ SearchListView uses ArtistSearchCollection for calling the server and getting li
 ajax get calls) and read the html and sets them for their proper view. This way we can have a separate folder containing
 the templates.
 
-**Frontend Unittest**: THIS IS A WORK IN PROGRESS, but for now I have set up Jasmine and sinos for testing my backbone based application. You can find a sample of a test under /test/js. The main problem with setting up the test right now is the fact that I'm rendering templates from files and Jasmine has issues getting the files. This issue will be fixed once I use grunt to pre-generate the templates.
+**Frontend Unittest**: THIS IS A WORK IN PROGRESS, but for now I have set up Jasmine and sinos for testing my backbone based application. You can find a sample of a test under /test/js. The main problem with setting up the test right now is the fact that I'm rendering templates from files and Jasmine has issues getting the files. This issue will be fixed once I use grunt to pre-generate the templates. You can run the test by opening test/js/specRunner.html
 
 Improvements to make
 ===========
