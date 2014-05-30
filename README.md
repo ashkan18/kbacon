@@ -23,28 +23,31 @@ nosetest for getting the code coverage of the tests.
 
 Back-end Design
 ---------
-Backend is all based on python flask micro-framework. You can find the back-end code under **kbdegreesvc** folder. The code starts from kbdegree.py file. In this file we create a
-new flask application and define all the endpoints. We have two important endpoints there
-- search_artist: gets a 'query' as get request parameter and returns a list of artist with the query in their name
-- find_path: gets artist id in the path and based on that returns a path from that artist id to Kevin Bacon
+Backend is all based on python flask micro-framework. You can find the back-end code under **kbdegreesvc** folder.
+The code starts from __init__ file of kbdegreesvc folder. In this file we define a new flask app
+and we import the interfaces. Here is a high level definition of each folder under kbdegreesvc:
+  - interfaces: package where we define all of our interfaces in there, Endpoints (interfaces) job is to
+  validate the request and present the response of each request to the users, to handle the core logic,
+  they make call to service layer
+        - artist.py: is where we define all the artists related endpoints, We have two important endpoints there
+            - search_artist: gets a 'query' as get request parameter
+            and returns a list of artist with the query in their name
+            - find_path: gets artist id in the path and based on that
+            returns a path from that artist id to Kevin Bacon
+  - services: Service layer is the place for storing the core logic of this app.This layer should not directly
+  access the data, the reason behind this decision is, this way we encapsulate the data access layer and in the future
+  we can easily switch from one data access layer to another without touching the service layer. In a nutshell,
+  service layer doesn't care how and from where we get the data.
+        - artists_services.py: Currently we have artist_service there which is used to define
+        all the functionality we support for accessing artist data.
 
-Endpoints (interfaces) job is to validate the request and present the response of each request to the users, to handle
-the core logic, they make call to service layer.
-
-**artists_services.py:** Service layer is the place for storing the core logic of this app. Currently we have artist_service
-there which is used to define all the functionality we support for accessing artist data. This layer should not directly
-access the data, the reason behind this decision is, this way we encapsulate the data access layer and in the future
-we can easily switch from one data access layer to another without touching the service layer. In a nutshell,
-service layer doesn't care how and from where we get the data.
-
-**data/artist_data.py:** Service layer uses data layer to access the data. artist_data holds the logic for initializing
-and accessing the data for
-artists and movies.
-
-**model/artist_model.py:**: Class defining an artist in our app
-**model/movie_model.py:**: Class defining a movie in our app
-
-I also have helper method json_helper.py which takes care of creating json result for artist and movie models.
+  - data: Service layer uses data layer to access the data.
+        - artist_data.py:  artist_data holds the logic for initializing and accessing the data for artists and movies.
+  - models: This package contains all the models we have in this app.
+        - artist_model.py:**: Class defining an artist in our app
+        - movie_model.py:**: Class defining a movie in our app
+  - helpers: This package is where I have all the helpers and utils used by my app
+        - json_helper.py: takes care of creating json result for artist and movie models.
 
 **Backend Testing**: I have used Flask-Testing and python unittest modules for handling test cases. You can find python unit test files under:
 /test/data and test/services
@@ -101,7 +104,7 @@ Run the app locally
 ===========
 You can run the app locally by running
 
-    python kbdegree.py
+    python kbdegreesvc/kbdegree.py
 
 This will run the server on port 5000 and you can access the main page on:
 http://localhost:5000/static/index.html
