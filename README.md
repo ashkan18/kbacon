@@ -32,6 +32,7 @@ and we import the interfaces. Here is a high level definition of each folder und
     - artist.py: is where we define all the artists related endpoints, We have two important endpoints there
       - search_artist: gets a 'query' as get request parameter and returns a list of artist with the query in their name
       - find_path: gets artist id in the path and based on that returns a path from that artist id to Kevin Bacon
+  
   - services: Service layer is the place for storing the core logic of this app.This layer should not directly
   access the data, the reason behind this decision is, this way we encapsulate the data access layer and in the future
   we can easily switch from one data access layer to another without touching the service layer. In a nutshell,
