@@ -7,7 +7,10 @@ module.exports = function(grunt) {
         separator: ';'
       },
       dist: {
-        src: ['src/bootstrap.js',
+        src: ['src/lib/jquery.min.js',
+            'src/lib/underscore-min.js',
+            'src/lib/backbone-min.js',
+              'src/lib/bootstrap.js',
               'src/templateLoader.js',
               'src/models/*.js',
               'src/views/*.js',
