@@ -46,12 +46,19 @@ artists and movies.
 
 I also have helper method json_helper.py which takes care of creating json result for artist and movie models.
 
+**Backend Testing**: I have used Flask-Testing and python unittest modules for handling test cases. You can find python unit test files under:
+/test/data and test/services
+under each folder you can run:
+    nosetests -v --with-coverage --cover-package=data --logging-level=CRITICAL
+    nosetests -v --with-coverage --cover-package=services --logging-level=CRITICAL
+These will run unittest and also give the current code coverage of the tests. Current code coverage on first suite is 83% and on second suite is 94%
+
 Front-end Design
 -----------
 On the front-end, I used bootstrap to get the proper layout and css classes, and used backbone for handling client side
-logic, calling to server and render the ui.
+logic, calling to server and render the ui. I've also used Grunt to concat and minify the javascript code, after running grunt all the javascript files and their dependencies will end up in one KBDegree.min.js file under static/js.
 
-We have an index.html which basically imports all the needed scripts.
+We have an index.html which basically imports one KBDegree.min.js script. You can see the actual different sources of this script under src/ folder. Here is a little more details about files under src:
 
 app.js is where my backbone router is defined. In this file I define two routes that I have in my app:
 - '': which goes to the home page. This route create a new HomeView. HomeView will render the HomeView.html underscore
@@ -73,6 +80,8 @@ SearchListView uses ArtistSearchCollection for calling the server and getting li
 ajax get calls) and read the html and sets them for their proper view. This way we can have a separate folder containing
 the templates.
 
+**Frontend Unittest**: THIS IS A WORK IN PROGRESS, but for now I have set up Jasmine and sinos for testing my backbone based application. You can find a sample of a test under /test/js. The main problem with setting up the test right now is the fact that I'm rendering templates from files and Jasmine has issues getting the files. This issue will be fixed once I use grunt to pre-generate the templates.
+
 Improvements to make
 ===========
 - Use datastore instead of in-memory dict: right now I'm using in memory dict for storing artist and movies. this
@@ -80,6 +89,8 @@ possibly means using lot of memory of the server, In next phase I will switch to
 
 - Use d3 for showing a graph: Right now I'm only using images to show the relation between artists and movies,
 it would be cool if I use d3 to show visually better relations.
+
+- Use grunt to pre-generate underscore templates
 
 - Add favicon: Missing it now
 
