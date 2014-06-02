@@ -86,8 +86,8 @@ the templates.
 
 Improvements to make
 ===========
-- Use datastore instead of in-memory dict: right now I'm using in memory dict for storing artist and movies. this
-possibly means using lot of memory of the server, In next phase I will switch to use NOSQL datastores for this.
+- Use datastore (Graph DB, neo4j) instead of in-memory dict: right now I'm using in memory dict for storing artist and movies. this
+possibly means using lot of memory of the server, In next phase I will switch to use Neo4j datastores for this.
 
 - Use d3 for showing a graph: Right now I'm only using images to show the relation between artists and movies,
 it would be cool if I use d3 to show visually better relations.
